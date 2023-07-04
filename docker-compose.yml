@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DATABASE_PASSWORD
+    ports:
+      - 5000:3306
+    volumes:
+      - db:/var/lib/mysql
+    # network_mode: "host"
+
+  app:
+    depends_on:
+      - mariadb
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 3001:3001
+    stdin_open: true
+    tty: true
+    # network_mode: "host"
+
+volumes: 
+  db:
