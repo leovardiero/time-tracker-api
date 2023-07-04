@@ -14,7 +14,7 @@ class TokenController {
 
     if (!user) {
       return res.status(401).json({
-        errors: ['User not found'],
+        errors: ['Invalid Credentials'],
       });
     }
 

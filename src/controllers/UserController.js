@@ -48,12 +48,10 @@ class UserController {
       }
 
       const newUser = await user.update(req.body);
+      const { id, email, name } = newUser;
 
-      const { id, email, nome } = newUser;
-
-      return res.json({ id, email, nome });
+      return res.json({ id, email, name });
     } catch (e) {
-      console.log(e);
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
       });

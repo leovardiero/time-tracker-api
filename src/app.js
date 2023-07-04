@@ -10,16 +10,11 @@ import helmet from 'helmet';
 import express from 'express';
 import homeRoutes from './routes/homeRoutes';
 import userRoute from './routes/UserRoutes';
+import projectRoute from './routes/projectRoutes';
 import tokenRoute from './routes/TokenRoutes';
-import studentRoute from './routes/StudentRoutes';
-import photoRoute from './routes/PhotoRoutes';
 
 const whiteList = [
-  'https://js.dev-lbv.com.br',
-  'http://localhost:3000',
   'http://localhost:3001',
-  'http://localhost:5001',
-  'http://localhost:5002',
 ];
 
 const corsOpetion = {
@@ -53,9 +48,8 @@ class App {
   routes() {
     this.app.use('/', homeRoutes);
     this.app.use('/user', userRoute);
-    this.app.use('/token', tokenRoute);
-    this.app.use('/student', studentRoute);
-    this.app.use('/photo', photoRoute);
+    this.app.use('/login', tokenRoute);
+    this.app.use('/project', projectRoute);
   }
 }
 

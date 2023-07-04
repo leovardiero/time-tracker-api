@@ -59,4 +59,8 @@ export default class User extends Model {
   isValidPassword(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
+
+  static associate(models) {
+    this.hasMany(models.Project, { foreignKey: 'project_id' });
+  }
 }

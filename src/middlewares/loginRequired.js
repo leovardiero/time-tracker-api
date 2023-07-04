@@ -25,7 +25,7 @@ export default async (req, res, next) => {
 
     if (!user) {
       return res.status(401).json({
-        errors: ['Invalid user'],
+        errors: ['Invalid credentials'],
       });
     }
 
@@ -35,7 +35,7 @@ export default async (req, res, next) => {
     return next();
   } catch (e) {
     return res.status(401).json({
-      errors: ['Invalid token'],
+      errors: ['Invalid credentials'],
     });
   }
 };
