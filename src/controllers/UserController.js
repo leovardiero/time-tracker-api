@@ -4,12 +4,15 @@ class UserController {
   // Create
   async create(req, res) {
     try {
+      console.log(req.body);
       const newUser = await User.create(req.body);
-      const { id, email, name } = newUser;
-      return res.json({ id, email, name });
+      console.log(newUser);
+      const { user_id, email, name } = newUser;
+      return res.json({ user_id, email, name });
     } catch (e) {
       return res.status(400).json({
-        errors: e.errors.map((err) => err.message),
+        errors: 'Error!',
+        // errors: e.errors.map((err) => err.message),
       });
     }
   }
@@ -27,10 +30,16 @@ class UserController {
   // Show
   async show(req, res) {
     try {
-      const user = await User.findByPk(req.params.id);
-      const { id, name, email } = user;
+      // const user = await User.findByPk(req.params.id);
+      const user = await User.findOne({
+        where: { user_id: req.params.id },
+        include: 'projects',
+      });
+      const { user_id, name, email } = user;
 
-      return res.json({ id, name, email });
+      console.log(user.projects[1].dataValues);
+
+      return res.json({ user_id, name, email });
     } catch (e) {
       return res.status(400).json(null);
     }

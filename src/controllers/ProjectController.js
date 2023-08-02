@@ -5,11 +5,11 @@ class ProjectController {
     try {
       console.log(req);
       const newProject = await Project.create({
-        name: req.body.name,
+        project_name: req.body.project_name,
         owner_id: req.userId,
       });
-      const { id, name, owner } = newProject;
-      return res.json({ id, name, owner });
+      const { project_id, project_name, owner_id } = newProject;
+      return res.json({ project_id, project_name, owner_id });
     } catch (e) {
       console.log(e);
       return res.status(400).json({

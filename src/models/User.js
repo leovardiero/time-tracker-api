@@ -5,6 +5,13 @@ export default class User extends Model {
   static init(sequelize) {
     super.init(
       {
+        user_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+        },
+
         name: {
           type: Sequelize.STRING,
           defaultValue: '',
@@ -65,6 +72,6 @@ export default class User extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Project, { as: 'projects' });
+    this.hasMany(models.Project, { foreignKey: 'owner_id', as: 'projects' });
   }
 }

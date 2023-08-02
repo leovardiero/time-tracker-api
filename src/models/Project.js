@@ -4,7 +4,15 @@ export default class Project extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: {
+        // Primary Key
+        project_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+        },
+
+        project_name: {
           type: Sequelize.STRING,
           defaultValue: '',
           unique: {
