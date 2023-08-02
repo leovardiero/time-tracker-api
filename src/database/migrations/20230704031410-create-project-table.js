@@ -3,13 +3,13 @@ module.exports = {
     await queryInterface.createTable(
       'projects',
       {
-        id: {
+        project_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
         },
-        name: {
+        project_name: {
           type: Sequelize.STRING,
           allowNull: false,
         },
@@ -18,7 +18,7 @@ module.exports = {
           allowNull: false,
           references: {
             model: 'users',
-            key: 'id',
+            key: 'user_id',
           },
         },
         created_at: {
@@ -29,7 +29,10 @@ module.exports = {
           type: Sequelize.DATE,
           allowNull: false,
         },
-
+        deleted_at: {
+          type: Sequelize.DATE,
+          allowNull: true,
+        },
       },
     );
   },
