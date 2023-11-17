@@ -7,11 +7,11 @@ class UserController {
       console.log(req.body);
       const newUser = await User.create(req.body);
       console.log(newUser);
-      const { user_id, email, name } = newUser;
-      return res.json({ user_id, email, name });
+      const { id, email, name } = newUser;
+      return res.json({ id, email, name });
     } catch (e) {
       return res.status(400).json({
-        errors: 'Error!',
+        errors: 'Error during create a new user!',
         // errors: e.errors.map((err) => err.message),
       });
     }
@@ -30,16 +30,31 @@ class UserController {
   // Show
   async show(req, res) {
     try {
-      // const user = await User.findByPk(req.params.id);
+      const { includeProjects } = req.params;
+
       const user = await User.findOne({
-        where: { user_id: req.params.id },
-        include: 'projects',
+        where: { id: req.params.id },
+        ...(includeProjects === 'true' && { include: 'projects' }),
       });
-      const { user_id, name, email } = user;
 
-      console.log(user.projects[1].dataValues);
+      const {
+        id, name, email, projects,
+      } = user;
 
-      return res.json({ user_id, name, email });
+      const cleanProject = [];
+      projects.forEach((project) => {
+        console.log(project.dataValues.id);
+        cleanProject.push({
+          id: project.dataValues.id,
+          name: project.dataValues.name,
+          description: project.dataValues.description,
+          color: project.dataValues.color,
+        });
+      });
+
+      return res.json({
+        id, name, email, projects: cleanProject,
+      });
     } catch (e) {
       return res.status(400).json(null);
     }

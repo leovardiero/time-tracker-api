@@ -6,7 +6,7 @@ const router = new Router();
 
 // Only to study, normally does not existis on real systems
 router.get('/', userController.index);
-router.get('/:id', userController.show);
+router.get('/:id/:includeProjects?', userController.show);
 
 router.post('/', userController.create);
 router.put('/', loginRequired, userController.update);

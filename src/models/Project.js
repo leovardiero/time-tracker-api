@@ -5,14 +5,14 @@ export default class Project extends Model {
     super.init(
       {
         // Primary Key
-        project_id: {
+        id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
         },
 
-        project_name: {
+        name: {
           type: Sequelize.STRING,
           defaultValue: '',
           unique: {
@@ -33,8 +33,20 @@ export default class Project extends Model {
             },
           },
         },
+
+        description: {
+          type: Sequelize.STRING,
+        },
+
+        color: {
+          type: Sequelize.STRING,
+        },
       },
-      { sequelize },
+      {
+        sequelize,
+        paranoid: true,
+        deletedAt: 'deleted_at',
+      },
     );
     return this;
   }

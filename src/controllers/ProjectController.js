@@ -3,17 +3,17 @@ import Project from '../models/Project';
 class ProjectController {
   async create(req, res) {
     try {
-      console.log(req);
+      // console.log(req.params);
       const newProject = await Project.create({
-        project_name: req.body.project_name,
-        owner_id: req.userId,
+        name: req.body.name,
+        owner_id: req.user_id,
       });
-      const { project_id, project_name, owner_id } = newProject;
-      return res.json({ project_id, project_name, owner_id });
+      const { id, name, owner_id } = newProject;
+      return res.json({ id, name, owner_id });
     } catch (e) {
       console.log(e);
       return res.status(400).json({
-        errors: e.errors.map((err) => err.message),
+        error: 'Unexpected error found during creating a project',
       });
     }
   }

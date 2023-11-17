@@ -3,7 +3,7 @@ module.exports = {
     await queryInterface.createTable(
       'users',
       {
-        user_id: {
+        id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           autoIncrement: true,
