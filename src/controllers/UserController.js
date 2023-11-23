@@ -41,10 +41,10 @@ class UserController {
         id, name, email, projects,
       } = user;
 
-      const cleanProject = [];
+      const cleanProjects = [];
       projects.forEach((project) => {
         console.log(project.dataValues.id);
-        cleanProject.push({
+        cleanProjects.push({
           id: project.dataValues.id,
           name: project.dataValues.name,
           description: project.dataValues.description,
@@ -53,7 +53,7 @@ class UserController {
       });
 
       return res.json({
-        id, name, email, projects: cleanProject,
+        id, name, email, projects: cleanProjects,
       });
     } catch (e) {
       return res.status(400).json(null);

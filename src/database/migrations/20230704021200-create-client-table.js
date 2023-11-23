@@ -1,7 +1,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
-      'projects',
+      'clients',
       {
         id: {
           type: Sequelize.INTEGER,
@@ -13,30 +13,6 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
           unique: true,
-        },
-        owner_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'users',
-            key: 'id',
-          },
-        },
-        client_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'clients',
-            key: 'id',
-          },
-        },
-        description: {
-          type: Sequelize.STRING,
-          allowNull: true,
-        },
-        color: {
-          type: Sequelize.STRING,
-          allowNull: true,
         },
         created_at: {
           type: Sequelize.DATE,
@@ -55,6 +31,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('projects');
+    await queryInterface.dropTable('clients');
   },
 };

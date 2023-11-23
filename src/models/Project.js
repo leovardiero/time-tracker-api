@@ -34,6 +34,15 @@ export default class Project extends Model {
           },
         },
 
+        client_id: {
+          type: Sequelize.INTEGER,
+          validate: {
+            notEmpty: {
+              msg: 'It is necessary a client',
+            },
+          },
+        },
+
         description: {
           type: Sequelize.STRING,
         },
@@ -53,5 +62,6 @@ export default class Project extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'owner_id', as: 'owner' });
+    this.belongsTo(models.Client, { foreignKey: 'client_id', as: 'client' });
   }
 }
