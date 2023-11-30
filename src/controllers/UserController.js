@@ -4,9 +4,7 @@ class UserController {
   // Create
   async create(req, res) {
     try {
-      console.log(req.body);
       const newUser = await User.create(req.body);
-      console.log(newUser);
       const { id, email, name } = newUser;
       return res.json({ id, email, name });
     } catch (e) {

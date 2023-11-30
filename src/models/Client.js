@@ -13,7 +13,9 @@ export default class Client extends Model {
 
         name: {
           type: Sequelize.STRING,
-          defaultValue: '',
+          unique: {
+            msg: 'Name must be unique',
+          },
           validate: {
             len: {
               args: [3, 255],

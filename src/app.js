@@ -8,9 +8,10 @@ import cors from 'cors';
 import helmet from 'helmet';
 
 import express from 'express';
-import homeRoutes from './routes/homeRoutes';
+import homeRoutes from './routes/HomeRoutes';
 import userRoute from './routes/UserRoutes';
-import projectRoute from './routes/projectRoutes';
+import projectRoute from './routes/ProjectRoutes';
+import clientRoute from './routes/ClientRoutes';
 import tokenRoute from './routes/TokenRoutes';
 
 const whiteList = [
@@ -50,6 +51,7 @@ class App {
     this.app.use('/user', userRoute);
     this.app.use('/login', tokenRoute);
     this.app.use('/project', projectRoute);
+    this.app.use('/client', clientRoute);
   }
 }
 
