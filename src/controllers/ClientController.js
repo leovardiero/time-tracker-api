@@ -8,7 +8,7 @@ class ClientController {
       const { id, name } = newClient;
       return res.json({ id, name });
     } catch (e) {
-      const errArray = e.errors.length === 0 ? ['Error during create a new client'] : e.errors.map((err) => err.message);
+      const errArray = !e.errors ? ['Error during create a new client'] : e.errors.map((err) => err.message);
       return res.status(400).json({
         errors: errArray,
       });
@@ -18,10 +18,10 @@ class ClientController {
   // Index
   async index(req, res) {
     try {
-      const clients = await Client.findAll({ attributes: ['id', 'name'] });
+      const clients = await Client.findAll();
       return res.json(clients);
     } catch (e) {
-      const errArray = e.errors.length === 0 ? ['Error during get all clients'] : e.errors.map((err) => err.message);
+      const errArray = !e.errors ? ['Error during get all clients'] : e.errors.map((err) => err.message);
       return res.status(400).json({
         errors: errArray,
       });
@@ -48,7 +48,7 @@ class ClientController {
         });
       }
 
-      return res.json({ client });
+      return res.json(client);
     } catch (e) {
       if (!e.errors) {
         return res.status(400).json({
@@ -101,7 +101,7 @@ class ClientController {
   async delete(req, res) {
     try {
       // Verifying User
-      const searchId = req.body.id;
+      const searchId = req.params.id;
 
       if (!searchId) {
         return res.status(400).json({
@@ -109,7 +109,7 @@ class ClientController {
         });
       }
 
-      const client = await Client.findByPk(req.body.id);
+      const client = await Client.findByPk(searchId);
 
       if (!client) {
         return res.status(400).json({

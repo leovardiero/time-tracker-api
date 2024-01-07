@@ -1,5 +1,13 @@
 import User from '../models/User';
 
+function cleanProjects(projects) {
+  return projects.map(({
+    id, name, color, description,
+  }) => ({
+    id, name, color, description,
+  }));
+}
+
 class UserController {
   // Create
   async create(req, res) {
@@ -18,7 +26,7 @@ class UserController {
   // Index
   async index(req, res) {
     try {
-      const users = await User.findAll({ attributes: ['id', 'name', 'email'] });
+      const users = await User.findAll();
       return res.json(users);
     } catch (e) {
       return res.status(400).json(null);
@@ -35,23 +43,17 @@ class UserController {
         ...(includeProjects === 'true' && { include: 'projects' }),
       });
 
+      console.log(user);
+
       const {
         id, name, email, projects,
       } = user;
 
-      const cleanProjects = [];
-      projects.forEach((project) => {
-        console.log(project.dataValues.id);
-        cleanProjects.push({
-          id: project.dataValues.id,
-          name: project.dataValues.name,
-          description: project.dataValues.description,
-          color: project.dataValues.color,
-        });
-      });
-
       return res.json({
-        id, name, email, projects: cleanProjects,
+        id,
+        name,
+        email,
+        ...(projects !== undefined && { projects: cleanProjects(projects) }),
       });
     } catch (e) {
       return res.status(400).json(null);

@@ -34,6 +34,6 @@ export default class Client extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Project, { foreignKey: 'owner_id', as: 'projects' });
+    this.hasMany(models.Project, { foreignKey: 'client_id', as: 'projects' });
   }
 }
