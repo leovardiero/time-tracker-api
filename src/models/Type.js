@@ -30,8 +30,7 @@ export default class Type extends Model {
     );
   }
 
-  // change here to actitivities
-  // static associate(models) {
-  //  this.hasMany(models.Project, { foreignKey: 'owner_id', as: 'projects' });
-  // }
+  static associate(models) {
+    this.hasMany(models.Activity, { foreignKey: 'type_id', as: 'activities' });
+  }
 }

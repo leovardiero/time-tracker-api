@@ -4,8 +4,9 @@ import User from '../models/User';
 import Project from '../models/Project';
 import Client from '../models/Client';
 import Type from '../models/Type';
+import Activity from '../models/Activity';
 
-const models = [User, Project, Client, Type];
+const models = [User, Project, Client, Type, Activity];
 const connection = new Sequelize(databaseConfig);
 
 models.forEach((model) => model.init(connection));
