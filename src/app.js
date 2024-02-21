@@ -13,6 +13,7 @@ import userRoute from './routes/UserRoutes';
 import projectRoute from './routes/ProjectRoutes';
 import clientRoute from './routes/ClientRoutes';
 import tokenRoute from './routes/TokenRoutes';
+import typeRoute from './routes/TypeRoutes';
 
 const whiteList = [
   'http://localhost:3001',
@@ -52,6 +53,7 @@ class App {
     this.app.use('/login', tokenRoute);
     this.app.use('/project', projectRoute);
     this.app.use('/client', clientRoute);
+    this.app.use('/type', typeRoute);
   }
 }
 
