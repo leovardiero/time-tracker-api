@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class Client extends Model {
+export default class Activity extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -13,9 +13,11 @@ export default class Client extends Model {
 
         project_id: {
           type: Sequelize.INTEGER,
+          allowNull: false,
           validate: {
-            notEmpty: {
-              msg: 'It is necessary a project',
+            notNull: {
+              args: true,
+              msg: 'It is necessary a project id',
             },
           },
         },
@@ -31,6 +33,13 @@ export default class Client extends Model {
 
         type_id: {
           type: Sequelize.INTEGER,
+          allowNull: false,
+          validate: {
+            notNull: {
+              args: true,
+              msg: 'It is necessary a type',
+            },
+          },
         },
 
         description: {
